@@ -187,4 +187,19 @@ class MenuController extends Controller
         Menu::find($request->input('id'))->delete();
         return back()->with('success', 'Successfully deleted Item !');
     }
+
+
+    // category create
+
+    public function createCategory(Request $request)
+    {
+        $category = Category::create(
+            [
+                'category_name' => request('catagory_name'),
+                'CODE' => "",
+                'description' => request('catagory_discription'),
+            ]
+        );
+        return back()->with('success', 'Sucessfully added');
+    }
 }

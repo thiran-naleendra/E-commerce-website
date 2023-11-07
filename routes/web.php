@@ -99,11 +99,14 @@ Route::delete('/menu/delete', [App\Http\Controllers\MenuController::class, 'dele
 // login
 
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [AuthController::class, 'login']);
+Route::post('/login', [AuthController::class, 'login']);//admin login
 
-Route::get('/clogin', [AuthController::class, 'Clogin'])->name('clogin');
-Route::get('/userProfile', [AuthController::class, 'userProfile'])->name('userProfile');
-Route::get('/userReg', [AuthController::class, 'userReg'])->name('userReg');
+Route::get('/clogin', [AuthController::class, 'Clogin'])->name('clogin');// customer login 
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');// customer logout 
+Route::post('/customerLogin', [AuthController::class, 'customerLogin'])->name('customerLogin');//customerLogin
+Route::get('/userProfile', [AuthController::class, 'userProfile'])->name('userProfile');//customer profile
+Route::get('/userReg', [AuthController::class, 'userReg'])->name('userReg');// customer register view
+Route::post('/createUser', [AuthController::class, 'createUser'])->name('createUser');//custome add 
 
 
 
@@ -113,4 +116,7 @@ Route::get('/userReg', [AuthController::class, 'userReg'])->name('userReg');
 Route::get('/admin', [AdminController::class, 'index'])->name('admin');
 Route::get('/addUser', [AdminController::class, 'addUser'])->name('addUser');
 
-Route::post('/regUser', [App\Http\Controllers\RegisterUserController::class, 'addUser'])->name('regUser');
+Route::post('/regUser', [App\Http\Controllers\RegisterUserController::class, 'addUser'])->name('regUser');//register user
+
+Route::post('/category_create', [App\Http\Controllers\MenuController::class, 'createCategory'])->name('category_create'); //category create
+Route::delete('/userDelete', [App\Http\Controllers\RegisterUserController::class, 'deleteUser'])->name('userDelete');

@@ -66,6 +66,8 @@
                 </li>
                 
                 <li><a href="{{ route('contact') }}">Contact</a></li>
+                <li><a href="{{ route('clogin') }}">Log In</a></li>
+                <li><a href="{{ route('userProfile') }}">Profile</a></li>
                 
 
             </ul>

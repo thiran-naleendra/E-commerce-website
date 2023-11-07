@@ -1,3 +1,4 @@
+
 <html>
 
 <head>
@@ -10,32 +11,41 @@
 </head>
 
 <body>
+  
     <section style="background-color: #eee;">
         <div class="container py-5">
           <div class="row">
             <div class="col">
               <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+                
                 <ol class="breadcrumb mb-0">
-                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
                   <li class="breadcrumb-item"><a href="#">User</a></li>
                   <li class="breadcrumb-item active" aria-current="page">User Profile</li>
+                  
                 </ol>
+                <div class="d-flex flex-row-reverse">
+                  <a href="{{ route('home') }}">
+                      <button type="button" class="btn btn-outline-primary ms-1">Home</button>
+                  </a>
+              </div>
               </nav>
             </div>
           </div>
-      
+          
           <div class="row">
             <div class="col-lg-4">
               <div class="card mb-4">
                 <div class="card-body text-center">
                   <img src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?auto=format&fit=crop&q=80&w=1780&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="avatar"
                     class="rounded-circle img-fluid" style="width: 150px;">
-                  <h5 class="my-3">John Smith</h5>
-                  <p class="text-muted mb-1">Full Stack Developer</p>
-                  <p class="text-muted mb-4">Bay Area, San Francisco, CA</p>
+                    {{-- {{ Auth::user()->name }} --}}
+                  <h5 class="my-3">{{ $user->name }}</h5> 
+                  <p class="text-muted mb-1">{{ $user->email }}</p>
+                  
                   <div class="d-flex justify-content-center mb-2">
-                    <button type="button" class="btn btn-primary">Edit</button>
-                    <button type="button" class="btn btn-outline-danger ms-1">Delete</button>
+                    
+                    <a href="{{route('logout')}}"><button type="button" class="btn btn-outline-danger ms-1">Log Out</button></a>
                   </div>
                 </div>
               </div>
@@ -74,7 +84,7 @@
                       <p class="mb-0">Full Name</p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0">Johnatan Smith</p>
+                      <p class="text-muted mb-0">{{ $user->name }}</p>
                     </div>
                   </div>
                   <hr>
@@ -83,7 +93,7 @@
                       <p class="mb-0">Email</p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0">example@example.com</p>
+                      <p class="text-muted mb-0">{{ $user->email }}</p>
                     </div>
                   </div>
                   <hr>
@@ -92,25 +102,18 @@
                       <p class="mb-0">Phone</p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0">(097) 234-5678</p>
+                      <p class="text-muted mb-0">{{ $user->mobile_no }}</p>
                     </div>
                   </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <p class="mb-0">Mobile</p>
-                    </div>
-                    <div class="col-sm-9">
-                      <p class="text-muted mb-0">(098) 765-4321</p>
-                    </div>
-                  </div>
+                  
+                
                   <hr>
                   <div class="row">
                     <div class="col-sm-3">
                       <p class="mb-0">Address</p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0">Bay Area, San Francisco, CA</p>
+                      <p class="text-muted mb-0">{{ $user->address }}</p>
                     </div>
                   </div>
                 </div>
