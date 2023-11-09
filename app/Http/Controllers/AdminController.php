@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 
 class AdminController extends Controller
@@ -17,7 +18,12 @@ class AdminController extends Controller
         return view('AdminDashboard.addUser')->with('user', $user); 
     }
 
-    
+    public function adminLogout()
+    {
+        Auth::logout(); // Log the user out
+
+        return redirect('/login'); // Redirect to the login page or any other desired page
+    }
 
     
 }

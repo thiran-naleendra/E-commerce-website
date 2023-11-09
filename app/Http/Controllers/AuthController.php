@@ -39,6 +39,8 @@ class AuthController extends Controller
         return redirect('/clogin'); // Redirect to the login page or any other desired page
     }
 
+    
+
     public function Clogin()
     {
 
@@ -77,17 +79,20 @@ class AuthController extends Controller
     }
     public function createUser(Request $request)
     {
-        $customer = User::create(
-            [
+        try {
+            $customer = User::create([
                 'name' => request('name'),
                 'email' => request('email'),
-                'password' => Hash::make($request->input('password')),
+                'password' => Hash::make(request('password')),
                 'address' => request('address'),
                 'user_role' => "user",
                 'mobile_no' => request('mobileno'),
                 'dob' => request('dob'),
-            ]
-        );
-        return back()->with('success', 'Sucessfully added');
+            ]);
+            
+            return back()->with('success', 'Successfully added');
+        } catch (\Exception $e) {
+            return back()->with('error', 'An error occurred while adding the user: ' . $e->getMessage());
+        }
     }
 }

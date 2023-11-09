@@ -11,15 +11,18 @@ class RegisterUserController extends Controller
 {
     public function addUser(Request $request)
     {
-        $user = User::create(
-            [
+        try {
+            $user = User::create([
                 'name' => request('name'),
                 'email' => request('email'),
-                'password' => Hash::make($request->input('password')),
-                'user_role' => $request->input('user_role'),
-            ]
-        );
-        return back()->with('success', 'Sucessfully added');
+                'password' => Hash::make(request('password')),
+                'user_role' => request('user_role'),
+            ]);
+        
+            return back()->with('success', 'Successfully added');
+        } catch (\Exception $e) {
+            return back()->with('error', 'An error occurred while adding the user: ' . $e->getMessage());
+        }
     }
     public function deleteUser(Request $request)
     {

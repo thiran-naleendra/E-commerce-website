@@ -68,16 +68,17 @@
                         <div class="card-footer">
                             <button type="submit" id="addUser" class="btn btn-primary">Add User</button>
                         </div>
-                        <script>
-                            // Get a reference to the button element
-                            const submitButton = document.getElementById('addUser');
+                        @if (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
 
-                            // Add a click event listener to the button
-                            submitButton.addEventListener('click', function() {
-                                // Display a pop-up message using the alert function
-                                alert('Sucessfully Added User. ');
-                            });
-                        </script>
+                        @if (session('error'))
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                        @endif
                     </form>
                 </div>
 
@@ -89,7 +90,7 @@
                                 <h3 class="card-title">User List</h3>
                             </div>
                             <div class="card-body">
-                                
+
                                 <table class="table table-striped table-bordered" id="dataTabl">
                                     <thead>
                                         <tr>
@@ -104,33 +105,37 @@
 
                                             <tr>
                                                 @if ($us->user_role !== 'user')
-                                                <td>{{ $us->name }}</td>
-                                                <td>{{ $us->user_role }}</td>
-                                                <td>{{ $us->email }}</td>
+                                                    <td>{{ $us->name }}</td>
+                                                    <td>{{ $us->user_role }}</td>
+                                                    <td>{{ $us->email }}</td>
 
 
 
-                                                <td>
-                                                    <div class="row">
-                                                        <div class="col">
-                                                            <a href="" class="btn btn-primary btn-sm btn-flat"
-                                                                style="width: 100%">Edit</a>
+                                                    <td>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <a href="" class="btn btn-primary btn-sm btn-flat"
+                                                                    style="width: 100%">Edit</a>
+                                                            </div>
+                                                            {{-- delete --}}
+                                                            <div class="col">
+                                                                <form method="POST" action="{{ route('userDelete') }}">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <input type="hidden" name="id"
+                                                                        value="{{ $us->id }}">
+                                                                    <button type="submit"
+                                                                        onclick="return confirm('Are you sure you want to delete this User?')"
+                                                                        class="btn btn-danger btn-sm btn-flat"
+                                                                        style="width: 100%">
+                                                                        Delete
+                                                                    </button>
+                                                                </form>
+                                                            </div>
                                                         </div>
-                                                        {{-- delete --}}
-                                                        <div class="col">
-                                                          <form method="POST" action="{{ route('userDelete') }}">
-                                                              @csrf
-                                                              @method('DELETE')
-                                                              <input type="hidden" name="id" value="{{ $us->id }}">
-                                                              <button type="submit" onclick="return confirm('Are you sure you want to delete this User?')" class="btn btn-danger btn-sm btn-flat" style="width: 100%">
-                                                                  Delete
-                                                              </button>
-                                                          </form>
-                                                      </div>
-                                                    </div>
 
 
-                                                </td>
+                                                    </td>
                                                 @endif
                                             </tr>
 
@@ -139,7 +144,7 @@
                                         </tbody>
                                     @endforeach
                                 </table>
-                                
+
                             </div>
                         </div>
                     </div>

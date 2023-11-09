@@ -14,6 +14,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PromotionsController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RegisterUserController;
+use App\Http\Controllers\ReportsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -114,9 +115,19 @@ Route::post('/createUser', [AuthController::class, 'createUser'])->name('createU
 
 
 Route::get('/admin', [AdminController::class, 'index'])->name('admin');
+
+Route::get('/adminlogout', [AdminController::class, 'adminLogout'])->name('adminlogout');// admin logout
+
 Route::get('/addUser', [AdminController::class, 'addUser'])->name('addUser');
+
 
 Route::post('/regUser', [App\Http\Controllers\RegisterUserController::class, 'addUser'])->name('regUser');//register user
 
 Route::post('/category_create', [App\Http\Controllers\MenuController::class, 'createCategory'])->name('category_create'); //category create
 Route::delete('/userDelete', [App\Http\Controllers\RegisterUserController::class, 'deleteUser'])->name('userDelete');
+
+
+
+Route::get('/reports', [App\Http\Controllers\ReportsController::class, 'index'])->name('reports');// reports
+
+Route::post('/storeSales', [App\Http\Controllers\OrderController::class, 'storeSales'])->name('storeSales'); //store sales

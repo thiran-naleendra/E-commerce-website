@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use  App\Models\Menu;
 use App\Models\area;
+use App\Models\Sales;
 
 use Illuminate\Http\Request;
 
@@ -41,9 +42,47 @@ class OrderController extends Controller
         return redirect()->back()->with('success', 'food added to cart successfully');
     }
 
-    public function area()
+    public function storeSales()
     {
-        
-
+        // if (session('menu')) {
+        //     // Get the currently authenticated user (if you want to associate the sale with a user)
+        //     $user = auth()->user();
+    
+        //     foreach (session('menu') as $id => $item) {
+        //         Sales::create([
+        //             'item_name' => $item['name'],
+        //             'price' => $item['price'],
+        //             'qty' => $item['quantity'],
+        //             'user_id' => $user->id, // Replace with the appropriate user ID
+        //             // Add other data as needed
+        //         ]);
+        //     }
+    
+        //     // Redirect or return a response as needed
+        // }
+        try {
+            if (session('menu')) {
+                // Get the currently authenticated user (if you want to associate the sale with a user)
+                $user = auth()->user();
+    
+                foreach (session('menu') as $id => $item) {
+                    Sales::create([
+                        'item_name' => $item['name'],
+                        'price' => $item['price'],
+                        'qty' => $item['quantity'],
+                        'user_id' => $user->id, 
+                        'user_name' => $user->name, 
+                        
+                        
+                    ]);
+                }
+    
+                // Redirect or return a success message
+                 return back()->with('success', 'Sale successfully recorded.');
+            }
+        } catch (\Exception $e) {
+            // Handle the exception, you can log it or display an error message
+            return back()->with('error', 'An error occurred while recording the sale.');
+        }
     }
 }

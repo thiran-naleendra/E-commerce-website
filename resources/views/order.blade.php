@@ -80,7 +80,7 @@
         <!-- /filters_full -->
 
         <div class="container margin_60_40">
-
+            
             <div class="row">
                 <aside class="col-lg-3" id="sidebar_fixed">
 
